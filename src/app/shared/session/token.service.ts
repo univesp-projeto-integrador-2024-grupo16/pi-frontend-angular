@@ -15,6 +15,15 @@ export class TokenService {
         window.sessionStorage.clear()
     }
 
+    public saveUserProject(project: string): void {
+        window.sessionStorage.removeItem(USER_PROJECT_KEY)
+        window.sessionStorage.setItem(USER_PROJECT_KEY, project)
+    }
+
+    public getUserProject(): string | null {
+      return window.sessionStorage.getItem(USER_PROJECT_KEY)
+    }
+
     public saveAccessToken(token: string): void {
         window.sessionStorage.removeItem(ACCESS_TOKEN_KEY)
         window.sessionStorage.setItem(ACCESS_TOKEN_KEY, token)

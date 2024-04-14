@@ -1,0 +1,26 @@
+
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+
+          <div class="w-full mb-5" >
+            <p-dropdown [options]="obras"
+                        dataKey="uuid"
+                        optionValue="uuid"
+                        optionLabel="nome_obra"
+                        [(ngModel)]="selectedObra" [showClear]="true" placeholder="Selecione a obra"  [style]="{'width':'100%'}"
+            >
+            </p-dropdown>
+
+          </div>
+          <button pButton pRipple label="Prosseguir" class="w-full mb-5" (click)="sing()" [routerLink]="['/']"></button>
+
+
+          <button pButton pRipple label="Sair" class="w-full mb-5 p-button-danger" (click)="singOut()" [routerLink]="['/']"></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+

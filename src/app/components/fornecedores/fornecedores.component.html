@@ -1,0 +1,89 @@
+<div class="card">
+  <p-toolbar>
+    <div class="p-toolbar-group-start">
+      <button pButton icon="pi pi-plus" class="mr-2 p-button-success" label="Incluir Novo Fornecedor"></button>
+    </div>
+<!--    <div class="p-toolbar-group-center">-->
+<!--        <span class="p-input-icon-left">-->
+<!--            <i class="pi pi-search"></i>-->
+<!--            <input pInputText placeholder="Search" />-->
+<!--        </span>-->
+<!--    </div>-->
+
+  </p-toolbar>
+
+
+  <p-table [value]="fornecedores" dataKey="uuid" [tableStyle]="{ 'min-width': '60rem' } " (onRowExpand)="getAvaliacao($event.data.uuid)" rowExpandMode="single">
+
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 5rem"></th>
+        <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+        <th pSortableColumn="cnpj">CNPJ <p-sortIcon field="cnpj"></p-sortIcon></th>
+        <th pSortableColumn="ie">Inscrição Estatual <p-sortIcon field="ie"></p-sortIcon></th>
+        <th pSortableColumn="im">Inscrição Municipal <p-sortIcon field="im"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-fornecedor let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton pRipple  [pRowToggler]="fornecedor" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td>{{ fornecedor.razao_social }}</td>
+        <td> {{ fornecedor.cnpj}} </td>
+        <td> {{ fornecedor.inscricao_estadual}} </td>
+        <td> {{ fornecedor.inscricao_municipal}} </td>
+
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion">
+      <tr>
+        <td colspan="7">
+          <div class="p-3">
+            <p-table [value]="qualificacaos" dataKey="uuid" selectionMode="single">
+              <ng-template pTemplate="caption"> Qualificações </ng-template>
+<!--              @if (qualificacaos){-->
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="tipo">Tipo <p-sortIcon field="tipo"></p-sortIcon></th>
+                  <th pSortableColumn="nf_bms">NF/BMS <p-sortIcon field="nf_bms"></p-sortIcon></th>
+                  <th pSortableColumn="observacoes">Observações <p-sortIcon field="observacoes"></p-sortIcon></th>
+                  <th pSortableColumn="data">Data <p-sortIcon field="data"></p-sortIcon></th>
+<!--                  <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>-->
+                  <th pSortableColumn="media">Média <p-sortIcon field="media"></p-sortIcon></th>
+                  <th style="width: 4rem"></th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-qualificacaos >
+                <tr>
+                  <td>{{  qualificacaos.tipo_fornecimento.tipo_fornecimento }}</td>
+                  <td>{{ qualificacaos.detalhes_qualificacao.nf_bms }}</td>
+                  <td>{{ qualificacaos.detalhes_qualificacao.observacoes }}</td>
+                  <td>{{ qualificacaos.criado_em | date: 'shortDate' }}</td>
+                  <td>
+                    <p-tag [value]="qualificacaos.mean" [severity]="getStatusSeverity(qualificacaos.mean)"></p-tag>
+                  </td>
+                  <td><p-button type="button" icon="pi pi-plus"></p-button></td>
+                </tr>
+              </ng-template>
+<!--              }-->
+<!--              @else{-->
+                <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="6">Sem dados.</td>
+                </tr>
+              </ng-template>
+<!--              }-->
+
+            </p-table>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

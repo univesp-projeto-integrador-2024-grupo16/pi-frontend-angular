@@ -14,7 +14,7 @@
             "sourceRoot": "src",
             "prefix": "app",
             "architect": {
-                "build": {
+              "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "outputPath": "dist/sakai-ng",
@@ -56,7 +56,13 @@
                             "vendorChunk": true,
                             "extractLicenses": false,
                             "sourceMap": true,
-                            "namedChunks": true
+                            "namedChunks": true,
+                            "fileReplacements": [
+                              {
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.development.ts"
+                              }
+                            ]
                         }
                     },
                     "defaultConfiguration": "production"
