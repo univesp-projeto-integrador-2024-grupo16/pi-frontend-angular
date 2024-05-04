@@ -1,0 +1,69 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div [formGroup]="avaliacaoForm" class="p-fluid p-formgrid grid mt-2">
+
+        <div class="col-12">
+          <h2>Avaliação do fornecedor
+            @if(fornecedor){
+              {{fornecedor.razao_social}}
+            }</h2>
+        </div>
+        @if (avaliacaoForm.controls['avaliacao_uuid'].getRawValue()){
+          <div class="col-12">
+            <h4>Id da Avaliação: {{avaliacaoForm.controls['avaliacao_uuid'].getRawValue()}}</h4>
+            <h6 class="ml-2">Avaliado em: {{avaliacaoForm.controls['criado_em'].getRawValue()}}</h6>
+          </div>
+        }
+        <div class="flex field col-12">
+          <span class="p-float-label col-2">
+            <p-dropdown
+              inputId="tipo_fornecimento"
+              id="tipo_fornecimento"
+              formControlName="tipo_fornecimento"
+              placeholder="Selecione o tipo do fornecimento"
+              [options]="tipo_fornecimento"
+              optionLabel="tipo_fornecimento"
+            />
+            <label for="tipo_fornecimento">Selecione o tipo do fornecimento</label>
+          </span>
+
+          <p-floatLabel class="ml-4 col-6">
+            <input pInputText id="nf_bms" type="text" formControlName="nf_bms"/>
+            <label for="nf_bms">Nota Fiscal/BMS</label>
+          </p-floatLabel>
+
+
+        </div>
+
+        @for(question of questions; track question.code){
+          <div class="flex field col-12">
+
+            <h5 pTooltip="{{question.tooltip}}" showDelay="1000" hideDelay="300" class="col-3">{{ question.question }}</h5>
+            <span class="p-float-label col-2 ml-3">
+            <p-dropdown id="{{question.code}}" [options]="answers" optionLabel="value" formControlName="{{question.code}}" placeholder="Selecione uma nota"></p-dropdown>
+            <label for="{{question.code}}">Nota</label>
+          </span>
+
+          </div>
+        }
+
+        <div class="flex field col-12">
+          <textarea rows="10" cols="50" pInputTextarea formControlName="observacoes" placeholder="Observações"></textarea>
+        </div>
+
+
+
+
+      </div>
+    </div>
+    <div class="col-12 flex justify-content-end">
+
+      <button pButton type="button" label="Cancelar" class="p-button-danger" (click)="cancelar()"></button>
+      @if(!avaliacaoForm.controls['avaliacao_uuid'].getRawValue()){
+        <button pButton type="button" label="Salvar" class="p-button-primary ml-2" (click)="salvar()"></button>
+      }
+
+    </div>
+  </div>
+</div>

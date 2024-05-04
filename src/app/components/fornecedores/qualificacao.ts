@@ -9,6 +9,9 @@ export interface Qualificacao {
     nf_bms: string,
     observacoes: string,
   },
+  fornecedor: {
+    uuid: string,
+  },
   criado_em: string,
 
 }
